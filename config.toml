@@ -1,0 +1,33 @@
+[engine]
+default = "openai"
+base_url = "https://integrate.api.nvidia.com/v1"
+api_key_env = "OPENAI_API_KEY"
+
+[intelligence]
+default_model = "nvidia/nemotron-3.5-bolt-e4b"
+temperature = 0.2
+
+[agent]
+default_agent = "orchestrator"
+memory_enabled = true
+learning_enabled = true
+skills_dir = "C:/bujji-pc/learned_skills"
+system_prompt = """
+You are Bujji, a warm, witty, intelligent personal AI voice assistant with a South Indian female personality.
+Rules:
+1. When asked to speak Telugu, reply naturally in Telugu script.
+2. Otherwise, reply in crisp, natural Indian English (1 to 2 sentences).
+3. Use `laptop_*` tools for PC/laptop actions and `phone_*` tools for mobile phone actions.
+"""
+
+[server]
+host = "127.0.0.1"
+port = 8000
+
+[mcp_servers.bujji_laptop]
+command = "C:/bujji-pc/.venv/Scripts/python.exe"
+args = ["C:/bujji-pc/mcp_servers/laptop_tools_mcp.py"]
+
+[mcp_servers.bujji_phone]
+command = "C:/bujji-pc/.venv/Scripts/python.exe"
+args = ["C:/bujji-pc/mcp_servers/phone_bridge_mcp.py"]
